@@ -136,6 +136,7 @@ else { our $selectedpilightd0 = "selected=selected" };
 if ( $transPIN eq "7" ) { our $selectedpin4 = "selected=selected" }
 elsif ( $transPIN eq "0" ) { our $selectedpin17 = "selected=selected" }
 elsif ( $transPIN eq "1" ) { our $selectedpin18 = "selected=selected" }
+elsif ( $transPIN eq "14" ) { our $selectedpin11 = "selected=selected" }
 elsif ( $transPIN eq "3" ) { our $selectedpin22 = "selected=selected" }
 elsif ( $transPIN eq "4" ) { our $selectedpin23 = "selected=selected" }
 elsif ( $transPIN eq "5" ) { our $selectedpin24 = "selected=selected" }
