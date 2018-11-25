@@ -9,12 +9,14 @@
 		"webserver-enable": 0,
 		"webserver-root": "REPLACEINSTALLFOLDER/config/plugins/REPLACEPLUGINFOLDER/pilight",
 		"webserver-http-port": 5001,
+		"webserver-https-port": 5002,
 		"webserver-cache": 0,
 		"whitelist": "",
 		"stats-enable": 0,
 		"watchdog-enable": 0,
 		"standalone": 1,
-		"port": 5000
+		"port": 5000,
+		"gpio-platform": "none"
 	},
 	"hardware": {
 		"433gpio": {

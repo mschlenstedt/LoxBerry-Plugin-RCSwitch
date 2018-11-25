@@ -1,49 +1,5 @@
 <link rel="stylesheet" href="/plugins/rcswitch/styles.css">
 
-<script type="text/javascript">
-
-// DIP Switch for Elro
-function addEvent( obj, type, fn )
-{
-   if (obj.addEventListener) {
-      obj.addEventListener( type, fn, false );
-   } else if (obj.attachEvent) {
-      obj["e"+type+fn] = fn;
-      obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
-      obj.attachEvent( "on"+type, obj[type+fn] );
-   }
-}
-function removeEvent( obj, type, fn )
-{
-   if (obj.removeEventListener) {
-      obj.removeEventListener( type, fn, false );
-   } else if (obj.detachEvent) {
-      obj.detachEvent( "on"+type, obj[type+fn] );
-      obj[type+fn] = null;
-      obj["e"+type+fn] = null;
-   }
-}
-function init () 
-{
-	var sw=document.getElementsByName('sw[]');
-	for (var i=0;i<sw.length;i++) {
-		addEvent( sw[i], 'click', clickSW);
-	}
-}
-function clickSW() {
-	var input=this.children[0];
-	if (this.className == 'off') {
-		this.className = 'on';
-		input.value = "1";
-	} else {
-		this.className = 'off';
-		input.value = "0";
-	}
-}
-init();
-
-</script>
-
 <p>
 Bitte lese Dir die Dokumentation unter <a href="http://www.loxwiki.eu:80/x/JATL" target="_blank">http://www.loxwiki.eu:80/x/JATL</a> durch, um zu erfahren wie Du aus Loxone heraus Deine Funksteckdosen schalten kannst.
 </p>
@@ -94,7 +50,7 @@ Bitte lese Dir die Dokumentation unter <a href="http://www.loxwiki.eu:80/x/JATL"
 <label>Pilight-Daemon starten:</label>
 </td>
 <td width="40%">
-<select name="pilightd" id="pilightd" data-mini="true" data-track-theme="e" data-role="slider">
+<select name="pilightd" id="pilightd" data-mini="true" data-track-theme="e" data-role="flipswitch">
 <option value="0" <!--$selectedpilightd0-->>Nein</option>
 <option value="1" <!--$selectedpilightd1-->>Ja</option>
 </select>
@@ -548,3 +504,47 @@ unterschiedlichen Funk-Protokollen</a></font>
 
 </div>
 </div>
+
+<script type="text/javascript">
+
+// DIP Switch for Elro
+function addEvent( obj, type, fn )
+{
+   if (obj.addEventListener) {
+      obj.addEventListener( type, fn, false );
+   } else if (obj.attachEvent) {
+      obj["e"+type+fn] = fn;
+      obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
+      obj.attachEvent( "on"+type, obj[type+fn] );
+   }
+}
+function removeEvent( obj, type, fn )
+{
+   if (obj.removeEventListener) {
+      obj.removeEventListener( type, fn, false );
+   } else if (obj.detachEvent) {
+      obj.detachEvent( "on"+type, obj[type+fn] );
+      obj[type+fn] = null;
+      obj["e"+type+fn] = null;
+   }
+}
+function init () 
+{
+	var sw=document.getElementsByName('sw[]');
+	for (var i=0;i<sw.length;i++) {
+		addEvent( sw[i], 'click', clickSW);
+	}
+}
+function clickSW() {
+	var input=this.children[0];
+	if (this.className == 'off') {
+		this.className = 'on';
+		input.value = "1";
+	} else {
+		this.className = 'off';
+		input.value = "0";
+	}
+}
+init();
+
+</script>
