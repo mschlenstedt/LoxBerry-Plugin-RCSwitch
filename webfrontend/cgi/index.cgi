@@ -52,7 +52,7 @@ our $pilightd;
 ##########################################################################
 
 # Version of this script
-$version = "0.0.7";
+$version = "0.0.8";
 
 # Figure out in which subfolder we are installed
 $psubfolder = abs_path($0);
@@ -98,7 +98,14 @@ if ( param('savesettings') ) {
   $pcfg->save();
 
   # Stop pilightd
-  $output = qx(sudo /etc/init.d/pilight stop);
+  my $output = qx(sudo /etc/init.d/pilight stop);
+
+  $output = qx($home/bin/showpitype);
+  chomp ($output);
+  if ($output eq "type_0") { $gpioplatform = "raspberrypizero" };
+  if ($output eq "type_1") { $gpioplatform = "raspberrypi1b+" };
+  if ($output eq "type_2") { $gpioplatform = "raspberrypi2" };
+  if ($output eq "type_3") { $gpioplatform = "raspberrypi3" };
 
   our $found = 0;
   open(F,"+<$home/config/plugins/$psubfolder/pilight/config.json");
@@ -114,6 +121,10 @@ if ( param('savesettings') ) {
       if ( $_ =~ /sender/ && $found ) {
         print F "		\"sender\": $transPIN,\n";
         $found = 0;
+        next;
+      }
+      if ( $_ =~ /gpio-platform/ ) {
+        print F "		\"gpio-platform\": \"$gpioplatform\",\n";
         next;
       }
       print F "$_\n";

@@ -36,12 +36,22 @@ fi
 if [ -x /usr/bin/logger ]; then 
 	/usr/bin/logger "loxberry-plugin-$pluginname - Configuring pilight"
 fi
+
 service pilight stop
+
 if [ -d /etc/pilight ] && [ ! -L /etc/pilight ]; then
   mv /etc/pilight /etc/pilight.orig
 fi
 rm -rf /etc/pilight
 ln -s REPLACEINSTALLFOLDER/config/plugins/$pluginname/pilight /etc/pilight
+
+# Add new parameter gpio-platform if not exist
+if  ! grep -q "gpio-platform" REPLACEINSTALLFOLDER/config/plugins/$pluginname/pilight/config.json
+then
+	sed -i 's#"port": 5000,#"port": 5000,\n\t\t"gpio-platform": "none",#g' REPLACEINSTALLFOLDER/config/plugins/$pluginname/pilight/config.json
+	sed -i 's#"port": 5000#"port": 5000,\n\t\t"gpio-platform": "none"#g' REPLACEINSTALLFOLDER/config/plugins/$pluginname/pilight/config.json
+fi
+
 service pilight start
 
 exit 0
