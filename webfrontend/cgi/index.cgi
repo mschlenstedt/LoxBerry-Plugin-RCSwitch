@@ -52,7 +52,7 @@ our $pilightd;
 ##########################################################################
 
 # Version of this script
-$version = "0.0.8";
+$version = "0.0.10";
 
 # Figure out in which subfolder we are installed
 $psubfolder = abs_path($0);
@@ -103,7 +103,12 @@ if ( param('savesettings') ) {
   $output = qx($home/bin/showpitype);
   chomp ($output);
   if ($output eq "type_0") { $gpioplatform = "raspberrypizero" };
-  if ($output eq "type_1") { $gpioplatform = "raspberrypi1b+" };
+  if ($output eq "type_1") {
+	$output = qx(cat /proc/device-tree/model);
+  	if ($output =~ /Raspberry Pi Model B Rev 1/) { $gpioplatform = "raspberrypi1b1" }
+	elsif ($output =~ /Raspberry Pi Model B Plus/) { $gpioplatform = "raspberrypi1b+" }
+	else { $gpioplatform = "raspberrypi1b2" };
+  }
   if ($output eq "type_2") { $gpioplatform = "raspberrypi2" };
   if ($output eq "type_3") { $gpioplatform = "raspberrypi3" };
 
@@ -124,7 +129,7 @@ if ( param('savesettings') ) {
         next;
       }
       if ( $_ =~ /gpio-platform/ ) {
-        print F "		\"gpio-platform\": \"$gpioplatform\",\n";
+        print F "		\"gpio-platform\": \"$gpioplatform\"\n";
         next;
       }
       print F "$_\n";

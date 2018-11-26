@@ -52,6 +52,24 @@ then
 	sed -i 's#"port": 5000#"port": 5000,\n\t\t"gpio-platform": "none"#g' REPLACEINSTALLFOLDER/config/plugins/$pluginname/pilight/config.json
 fi
 
-service pilight start
+# ini parser from https://www.joedog.org/2015/02/13/sh-script-ini-parser/
+# and http://mark.aufflick.com/blog/2007/11/08/parsing-ini-files-with-sed
+iniparser() {
+    INI_FILE=$1
+    INI_SECTION=$2
+    eval `sed -e 's/[[:space:]]*\=[[:space:]]*/=/g' \
+        -e 's/;.*$//' \
+        -e 's/[[:space:]]*$//' \
+        -e 's/^[[:space:]]*//' \
+        -e "s/^\(.*\)=\([^\"']*\)$/$INI_SECTION\1=\"\2\"/" \
+        < $INI_FILE \
+        | sed -n -e "/^\[$INI_SECTION\]/,/^\s*\[/{/^[^;].*\=.*/p;}"`
+}
+ 
+iniparser REPLACEINSTALLFOLDER/config/plugins/$pluginname/RCSwitch.cfg "general"
+
+if [ $generalStartPilightd -eq "1" ]; then 
+	service pilight start
+fi
 
 exit 0
