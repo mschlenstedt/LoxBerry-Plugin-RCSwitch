@@ -33,7 +33,7 @@ use CGI qw/:standard/;
 ##########################################################################
 
 # Version of this script
-our $version = "0.0.2";
+our $version = "0.0.3";
 
 # Figure out in which subfolder we are installed
 #our $psubfolder = abs_path($0);
@@ -147,7 +147,7 @@ if ( $query{'protocol'} ne "" ) {
   # standard is "elro"
   print "/usr/local/bin/pilight-send -P 5000 -S 127.0.0.1 $protocol $id $systemcode $unit $all $command\n\n";
   our $output = qx(/usr/local/bin/pilight-send -P 5000 -S 127.0.0.1 $protocol $id $systemcode $unit $all $command 2>&1);
-  our $output1 = qx(/usr/local/bin/pilight-send -P 5000 -S 127.0.0.1 $protocol $id $systemcode $unit $all $command 2>&1); # send twice
+  #our $output1 = qx(/usr/local/bin/pilight-send -P 5000 -S 127.0.0.1 $protocol $id $systemcode $unit $all $command 2>&1); # send twice
 
 if ( !$output ) { $output = "OK." }
 
