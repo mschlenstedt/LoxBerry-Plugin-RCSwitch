@@ -72,4 +72,15 @@ if [ $generalStartPilightd -eq "1" ]; then
 	service pilight start
 fi
 
+# Installing WiringPi on LoxBerry 2.0
+if [ ! -x /usr/bin/gpio ]; then
+  if [ -x /usr/bin/logger ]; then
+        /usr/bin/logger "loxberry-plugin-$pluginname - Installing WiringPi - please be patient..."
+  fi
+  cd /tmp
+  wget https://project-downloads.drogon.net/wiringpi-latest.deb
+  dpkg -i wiringpi-latest.deb
+  rm wiringpi-latest.deb
+fi
+
 exit 0
