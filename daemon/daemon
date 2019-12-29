@@ -26,6 +26,12 @@ if [ ! -x /usr/local/sbin/pilight-daemon ]; then
   if [ -x /usr/bin/logger ]; then 
 	/usr/bin/logger "loxberry-plugin-$pluginname - Installing pilight - please be patient..."
   fi
+  cd /tmp
+  wget http://apt.pilight.org/pool/stable/main/l/libmbedx509-0/libmbedx509-0_2.6.0-1_armhf.deb
+  wget http://apt.pilight.org/pool/stable/main/l/libmbedtls10/libmbedtls10_2.6.0-1_armhf.deb
+  wget http://apt.pilight.org/pool/stable/main/l/libmbedcrypto0/libmbedcrypto0_2.6.0-1_armhf.deb
+  dpkg -i libmbed*.deb
+  rm libmbed*.deb
   echo "deb http://apt.pilight.org/ stable main" > /etc/apt/sources.list.d/pilight.list
   /usr/bin/wget -O - http://apt.pilight.org/pilight.key | apt-key add -
   /usr/bin/apt-get update
