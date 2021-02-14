@@ -111,6 +111,7 @@ if ( param('savesettings') ) {
   }
   if ($output eq "type_2") { $gpioplatform = "raspberrypi2" };
   if ($output eq "type_3") { $gpioplatform = "raspberrypi3" };
+  if ($output eq "type_4") { $gpioplatform = "raspberrypi4" };
 
   our $found = 0;
   open(F,"+<$home/config/plugins/$psubfolder/pilight/config.json");
