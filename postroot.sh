@@ -58,7 +58,7 @@ ln -s $PCONFIG/pilight /etc/pilight
 # Add new parameter gpio-platform if not exist
 jq '.settings."gpio-platform" = "none"' $PCONFIG/pilight/config.json > $PCONFIG/pilight/config.json.new
 mv $PCONFIG/pilight/config.json.new $PCONFIG/pilight/config.json
-jq '.settings.port = "5000"' $PCONFIG/pilight/config.json > $PCONFIG/pilight/config.json.new
+jq '.settings.port = 5000' $PCONFIG/pilight/config.json > $PCONFIG/pilight/config.json.new
 mv $PCONFIG/pilight/config.json.new $PCONFIG/pilight/config.json
 chown loxberry:loxberry $PCONFIG/pilight/*
 
