@@ -50,15 +50,15 @@ PBIN=$LBPBIN/$PDIR
 echo "Configuring pilight - please be patient..."
 if [ -d /etc/pilight ] && [ ! -L /etc/pilight ]; then
   mv /etc/pilight /etc/pilight.orig
-  cp /etc/pilight.orig/pilight.pem $PCONFIG
+  cp /etc/pilight.orig/pilight.pem $PCONFIG/pilight
 fi
 rm -rf /etc/pilight
-ln -s $PCONFIG /etc/pilight
+ln -s $PCONFIG/pilight /etc/pilight
 
 # Add new parameter gpio-platform if not exist
-jq '.settings.gpio-platform = "none"' $PCONFIG/config.json > $PCONFIG/config.json.new
-mv $PCONFIG/config.json.new $PCONFIG/config.json
-jq '.settings.port = "5000"' $PCONFIG/config.json > $PCONFIG/config.json.new
-mv $PCONFIG/config.json.new $PCONFIG/config.json
+jq '.settings.gpio-platform = "none"' $PCONFIG/pilight/config.json > $PCONFIG/pilight/config.json.new
+mv $PCONFIG/pilight/config.json.new $PCONFIG/pilight/config.json
+jq '.settings.port = "5000"' $PCONFIG/pilight/config.json > $PCONFIG/pilight/config.json.new
+mv $PCONFIG/pilight/config.json.new $PCONFIG/pilight/config.json
 
 exit 0
