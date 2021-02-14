@@ -7,7 +7,7 @@
 		"pid-file": "/var/run/pilight.pid",
 		"log-file": "REPLACEINSTALLFOLDER/log/plugins/REPLACEPLUGINFOLDER/pilight.log",
 		"webserver-enable": 0,
-		"webserver-root": "REPLACEINSTALLFOLDER/config/plugins/REPLACEPLUGINFOLDER/pilight",
+		"webserver-root": "/usr/local/share/pilight/webgui",
 		"webserver-http-port": 5001,
 		"webserver-https-port": 5002,
 		"webserver-cache": 0,

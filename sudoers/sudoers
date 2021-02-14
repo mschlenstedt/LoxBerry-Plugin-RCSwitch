@@ -1,0 +1,2 @@
+%loxberry ALL = NOPASSWD: REPLACELBPDATADIR/REPLACELBPPLUGINDIR/bin/send433
+%loxberry ALL = NOPASSWD: /etc/init.d/pilight
