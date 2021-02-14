@@ -56,11 +56,9 @@ rm -rf /etc/pilight
 ln -s $PCONFIG /etc/pilight
 
 # Add new parameter gpio-platform if not exist
-if  ! grep -q "gpio-platform" $PCONFIG/config.json
-	jq '.settings.gpio-platform = "none"' $PCONFIG/config.json > $PCONFIG/config.json.new
-	mv $PCONFIG/config.json.new $PCONFIG/config.json
-	jq '.settings.port = "5000"' $PCONFIG/config.json > $PCONFIG/config.json.new
-	mv $PCONFIG/config.json.new $PCONFIG/config.json
-fi
+jq '.settings.gpio-platform = "none"' $PCONFIG/config.json > $PCONFIG/config.json.new
+mv $PCONFIG/config.json.new $PCONFIG/config.json
+jq '.settings.port = "5000"' $PCONFIG/config.json > $PCONFIG/config.json.new
+mv $PCONFIG/config.json.new $PCONFIG/config.json
 
 exit 0
